@@ -29,7 +29,7 @@ public class WordRow : NotifyPropertyModel
     {
         if ((text ??= string.Empty).Length > rowLength)
         {
-            throw new ArgumentException($"Parameter {nameof(rowLength)} must not exceed {nameof(rowLength)} of {rowLength}", nameof(rowLength));
+            throw new ArgumentException($"Parameter {nameof(text)} length must not exceed {nameof(rowLength)} of {rowLength}", nameof(text));
         }
 
         SetWordAndCharactersArray(text);
@@ -75,12 +75,6 @@ public class WordRow : NotifyPropertyModel
             return;
         }
 
-        if (text.Length > _maxLength)
-        {
-            // if word is beyond length limit do nothing.
-            return;
-        }
-
         SetWordAndCharactersArray(text);
     }
 
@@ -116,6 +110,11 @@ public class WordRow : NotifyPropertyModel
 
     void SetWordAndCharactersArray(string text)
     {
+        if (text.Length > _maxLength)
+        {
+            throw new ArgumentOutOfRangeException($"Parameter {nameof(text)} must not exceed length of {_maxLength}.", nameof(text));
+        }
+
         Word = text;
         
         Characters = new WordCharacter[_maxLength];
