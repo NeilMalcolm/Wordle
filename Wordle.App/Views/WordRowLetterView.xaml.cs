@@ -4,14 +4,6 @@ namespace Wordle.App.Views;
 
 public partial class WordRowLetterView : Label
 {
-	private static readonly Color _incorrectPlacementColor = Color.FromHex("f5d142");
-	private static readonly Color _correctPlacementColor = Color.FromHex("4dbd51");
-	private static readonly Color _notInWordColor = Color.FromHex("6b6b6b");
-	private static readonly Color _notInWordTextColor = Colors.White;
-	private static readonly Color _unknownTextColor = Color.FromHex("212121");
-	private static readonly Color _incorrectPlacementTextColor = Colors.White;
-	private static readonly Color _correctPlacementTextColor = Colors.White;
-
 	public static readonly BindableProperty CharacterStatusProperty = BindableProperty.Create
 	(
 		propertyName: nameof(CharacterStatus),
@@ -26,7 +18,7 @@ public partial class WordRowLetterView : Label
 	{
 		InitializeComponent();
 
-		BackgroundColor = Colors.LightGrey;
+		Style = App.Current.Resources.GetStyleFromResourceDictionary("UnknownWordRowLetterStyle");
 	}
 
 	public bool CharacterStatus
@@ -40,32 +32,26 @@ public partial class WordRowLetterView : Label
 		if (sender is WordRowLetterView letterView 
 			&& newValue is CharacterCorrectStatus status)
         {
-			Color bgColor;
-			Color textColor;
+            string styleName;
 
-			switch (status)
+            switch (status)
             {
 				case CharacterCorrectStatus.CorrectPosition:
-					textColor = _correctPlacementTextColor;
-					bgColor = _correctPlacementColor;
+					styleName = "CorrectWordRowLetterStyle";
 					break;
 				case CharacterCorrectStatus.IncorrectPosition:
-					textColor = _incorrectPlacementTextColor;
-					bgColor = _incorrectPlacementColor;
+					styleName = "IncorrectWordRowLetterStyle";
 					break;
 				case CharacterCorrectStatus.NotInWord:
-					textColor = _notInWordTextColor;
-					bgColor = _notInWordColor;
+					styleName = "NotInWordWordRowLetterStyle";
 					break;
 				default:
 				case CharacterCorrectStatus.Unknown:
-					textColor = _notInWordTextColor;
-					bgColor = _unknownTextColor;
+					styleName = "UnknownWordRowLetterStyle";
 					break;
             }
 
-			letterView.TextColor = textColor;
-			letterView.BackgroundColor = bgColor;
+			letterView.Style = App.Current.Resources.GetStyleFromResourceDictionary(styleName);
 		}
 	}
 }

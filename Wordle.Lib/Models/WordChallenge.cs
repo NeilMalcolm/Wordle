@@ -10,8 +10,10 @@ public class WordChallenge : NotifyPropertyModel
     private readonly int _maxGuessAttempts;
 
     private int _currentGuessAttempt = 0;
-    private List<WordRow> _wordRows;
+    private WordRow[] _wordRows;
     private ChallengeState _state;
+
+    private WordCharacter[] _enteredCharacters;
 
     public WordChallenge(string word, int numRows, int rowLength = Defaults.WordRowLength)
     {
@@ -19,19 +21,21 @@ public class WordChallenge : NotifyPropertyModel
         _maxGuessAttempts = numRows;
         _rowLength = rowLength;
 
-        WordRows = new List<WordRow>();
+        WordRows = new WordRow[_maxGuessAttempts];
 
         for (var i = 0; i < _maxGuessAttempts; i++)
         {
-            WordRows.Add(new WordRow(_rowLength));
+            WordRows[i] = new WordRow(_rowLength);
         }
+
+        _enteredCharacters = new WordCharacter[_rowLength];
     }
 
     public bool CanMakeGuessOnCurrentRow => WordRows[_currentGuessAttempt].IsComplete;
 
     public int MaxLength => _rowLength;
 
-    public List<WordRow> WordRows
+    public WordRow[] WordRows
     {
         get => _wordRows;
         private set => SetProperty(ref _wordRows, value);
@@ -43,9 +47,17 @@ public class WordChallenge : NotifyPropertyModel
         set => SetProperty(ref _state, value);
     }
 
+    public WordCharacter[] EnteredCharacters
+    {
+        get => _enteredCharacters;
+        set => SetProperty(ref _enteredCharacters, value);
+    }
+
     public bool MakeGuess()
     {
         var result = WordRows[_currentGuessAttempt].MakeGuess(_word);
+
+        EnteredCharacters = WordRows[_currentGuessAttempt].Characters;
 
         if (result)
         {

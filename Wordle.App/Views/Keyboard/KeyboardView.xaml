@@ -10,11 +10,11 @@
 
     <Grid.Resources>
         <Style TargetType="Button"
-               x:Key="KeyboardButtonStyle">
+               x:Key="KeyboardButtonNormalStyle">
             <Setter Property="BackgroundColor"
-                    Value="LightGray"/>
+                    Value="{StaticResource UnknownBackgroundColor}"/>
             <Setter Property="TextColor"
-                    Value="DimGray"/>
+                    Value="{StaticResource UnsubmittedTextColor}"/>
             <Setter Property="FontAttributes"
                     Value="Bold"/>
             <Setter Property="FontSize"
@@ -31,17 +31,47 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style TargetType="Button"
+               x:Key="KeyboardButtonNotInWordStyle"
+               BasedOn="{StaticResource KeyboardButtonNormalStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource NotInWordBackgroundColor}"/>
+            <Setter Property="TextColor"
+                    Value="{StaticResource SubmittedTextColor}"/>
+        </Style>
+        
+        <Style TargetType="Button"
+               x:Key="KeyboardButtonCorrectPositionStyle"
+               BasedOn="{StaticResource KeyboardButtonNormalStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource CorrectPositionBackgroundColor}"/>
+            <Setter Property="TextColor"
+                    Value="{StaticResource SubmittedTextColor}"/>
+        </Style>
+
+        <Style TargetType="Button"
+               x:Key="KeyboardButtonIncorrectPositionStyle"
+               BasedOn="{StaticResource KeyboardButtonNormalStyle}">
+            <Setter Property="BackgroundColor"
+                    Value="{StaticResource IncorrectPositionBackgroundColor}"/>
+            <Setter Property="TextColor"
+                    Value="{StaticResource SubmittedTextColor}"/>
+        </Style>
+
         <Style TargetType="Button"
                x:Key="KeyboardEnterButtonStyle"
-               BasedOn="{StaticResource KeyboardButtonStyle}">
+               BasedOn="{StaticResource KeyboardButtonNormalStyle}">
             <Setter Property="WidthRequest"
                     Value="70"/>
         </Style>
     </Grid.Resources>
     
     <!-- First Row -->
-    <Button Text="Q"
-            Style="{StaticResource KeyboardButtonStyle}"
+    <Button x:Uid=""
+            Text="Q"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="0"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -49,7 +79,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="W"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="1"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -57,7 +88,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="E"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="2"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -65,7 +97,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="R"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="3"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -73,7 +106,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="T"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="4"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -81,7 +115,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="Y"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="5"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -89,7 +124,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="U"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="6"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -97,7 +133,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="I"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="7"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -105,7 +142,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="O"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="8"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -113,7 +151,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="P"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="9"
             Grid.Row="0"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -122,7 +161,8 @@
 
     <!-- Second Row -->
     <Button Text="A"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="0"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -130,7 +170,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="S"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="1"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -138,7 +179,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="D"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="2"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -146,7 +188,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="F"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="3"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -154,7 +197,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="G"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="4"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -162,7 +206,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="H"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="5"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -170,7 +215,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="J"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="6"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -178,7 +224,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="K"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="7"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -186,7 +233,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="L"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="8"
             Grid.Row="1"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -195,6 +243,7 @@
 
     <!-- Third Row -->
     <Button Text="ENTER"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
             Style="{StaticResource KeyboardEnterButtonStyle}"
             FontSize="Micro"
             Grid.Column="0"
@@ -204,7 +253,8 @@
                               Path=OnEnterTappedCommand}"/>
 
     <Button Text="Z"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="2"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -212,7 +262,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="X"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="3"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -220,7 +271,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="C"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="4"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -228,7 +280,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="V"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="5"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -236,7 +289,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="B"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="6"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -244,7 +298,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="N"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="7"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -252,7 +307,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="M"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="8"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
@@ -260,7 +316,8 @@
             CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
 
     <Button Text="&#x232B;"
-            Style="{StaticResource KeyboardButtonStyle}"
+            AutomationId="{Binding Source={RelativeSource Self}, Path=Text}"
+            Style="{StaticResource KeyboardButtonNormalStyle}"
             Grid.Column="9"
             Grid.Row="2"
             Command="{Binding Source={x:Reference KeyboardViewRoot}, 
