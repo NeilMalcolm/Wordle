@@ -6,6 +6,10 @@ namespace Wordle.App.Views;
 
 public partial class KeyboardView : Grid
 {
+	const string KeyboardButtonCorrectPositionStyleKey = "KeyboardButtonCorrectPositionStyle";
+	const string KeyboardButtonIncorrectPositionStyleKey = "KeyboardButtonIncorrectPositionStyle";
+	const string KeyboardButtonNotInWordStyleKey = "KeyboardButtonNotInWordStyle";
+
 	private StringBuilder _stringBuilder = new StringBuilder();
 
 	public static readonly BindableProperty TextProperty = BindableProperty.Create
@@ -143,7 +147,23 @@ public partial class KeyboardView : Grid
 	{
 		Text = _stringBuilder.ToString();
 	}
-	
+
+	void Reset()
+	{
+		_stringBuilder.Clear();
+
+		var buttons = Buttons;
+		foreach (var button in buttons)
+		{
+			if (button.Text == "ENTER" 
+				|| button.Text == "&#x232B;")
+			{
+				continue;
+			}
+
+			SetButtonTheme(this, button, "KeyboardButtonNormalStyle");
+		}
+	}
 	public static void OnTextPropertyChanged(BindableObject sender, object oldValue, object newValue)
     {
 		if (sender is KeyboardView keyboardView)
@@ -157,52 +177,40 @@ public partial class KeyboardView : Grid
             }
         }
     }
-	
+
 	public static void OnEnteredCharactersChanged(BindableObject sender, object oldValue, object newValue)
     {
 		if (sender is KeyboardView keyboardView)
         {
 			if (newValue is WordCharacter[] chars && chars.Length > 0)
             {
+				var buttons = keyboardView.Buttons;
 				foreach (var character in chars)
 				{
 					if (character is null)
                     {
 						continue;
                     }
-					var button = keyboardView.Buttons.FirstOrDefault(x => x.Text == character.Character.ToString());
+					var button = buttons.FirstOrDefault(x => x.Text == character.Character.ToString());
 
 					if (character.CharacterStatus == CharacterCorrectStatus.CorrectPosition)
 					{
-						SetButtonTheme(keyboardView, button, "KeyboardButtonCorrectPositionStyle");
+						SetButtonTheme(keyboardView, button, KeyboardButtonCorrectPositionStyleKey);
 					}
 					else if (character.CharacterStatus == CharacterCorrectStatus.IncorrectPosition)
 					{
-						SetButtonTheme(keyboardView, button, "KeyboardButtonIncorrectPositionStyle");
+						SetButtonTheme(keyboardView, button, KeyboardButtonIncorrectPositionStyleKey);
 					}
 					else
 					{
-						SetButtonTheme(keyboardView, button, "KeyboardButtonNotInWordStyle");
+						SetButtonTheme(keyboardView, button, KeyboardButtonNotInWordStyleKey);
 					}
                 }
             }
         }
     }
 
-	private void ResetAll()
-    {
-		foreach (var button in Buttons)
-        {
-			if (button.Text == "ENTER" || button.Text == "&#x232B;")
-            {
-				continue;
-            }
-
-			SetButtonTheme(this, button, "KeyboardButtonNormalStyle");
-		}
-	}
-
-	private static void SetButtonTheme(KeyboardView keyboardView, Button button, string styleName)
+	static void SetButtonTheme(KeyboardView keyboardView, Button button, string styleName)
     {
 		button.Style = keyboardView.Resources.GetStyleFromResourceDictionary(styleName);
 	}
