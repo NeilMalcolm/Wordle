@@ -4,9 +4,10 @@
              BackgroundColor="{DynamicResource SecondaryColor}"
              xmlns:views="clr-namespace:Wordle.App.Views">
 
-    <StackLayout>
-        <CollectionView ItemsSource="{Binding WordRows}"
-                        Margin="7.5">
+    <Grid RowDefinitions="65, *, Auto, Auto">
+        <!--<CollectionView ItemsSource="{Binding WordRows}"
+                        Margin="7.5"
+                        VerticalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical"
                                    ItemSpacing="7.5"/>
@@ -18,11 +19,35 @@
                     <views:WordRowView BindingContext="{Binding .}"/>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <views:KeyboardView MaxLength="{Binding MaxLength}"
+        </CollectionView>-->
+        <StackLayout Grid.Row="0"
+                     Padding="0"
+                     Margin="0">
+            <Label Text="Wordle.Maui"
+                   FontAttributes="Bold"
+                   FontSize="Title"
+                   TextColor="Black"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+        
+        <StackLayout BindableLayout.ItemsSource="{Binding WordRows}"
+                     Spacing="7.5"
+                     Grid.Row="1">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <views:WordRowView BindingContext="{Binding .}"/>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+        
+        <StackLayout Grid.Row="3">
+            <views:KeyboardView MaxLength="{Binding MaxLength}"
                             Text="{Binding GuessText}"
                             OnEnterTappedCommand="{Binding SubmitGuessCommand}"
-                            IsEnabled="{Binding CanGuess}"/>
-    </StackLayout>
+                            IsEnabled="{Binding CanGuess}"
+                            Padding="0, 10"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

@@ -5,7 +5,7 @@
       x:Name="KeyboardViewRoot"
       ColumnDefinitions="*,*,*,*,*,*,*,*,*,*"
       RowDefinitions="*,*,*"
-      RowSpacing="4"
+      RowSpacing="8"
       Margin="3, 0">
 
     <Grid.Resources>
@@ -20,11 +20,16 @@
             <Setter Property="FontSize"
                     Value="10"/>
             <Setter Property="WidthRequest"
-                    Value="36"/>
+                    Value="34"/>
             <Setter Property="HeightRequest"
-                    Value="45"/>
+                    Value="55"/>
             <Setter Property="HorizontalOptions"
                     Value="Center"/>
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow />
+                </Setter.Value>
+            </Setter>
         </Style>
         <Style TargetType="Button"
                x:Key="KeyboardEnterButtonStyle"
