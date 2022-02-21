@@ -15,7 +15,6 @@ public class MainViewModel : BaseViewModel
     bool _canGuess = true;
 
     WordChallenge _challenge;
-    IList<WordRow> _wordRows;
     string _guessText;
 
     public MainViewModel(IWordService wordService)
@@ -27,13 +26,13 @@ public class MainViewModel : BaseViewModel
     }
 
     public ICommand SubmitGuessCommand { get; private set; }
-    public int MaxLength => Defaults.WordRowLength;
 
+    public int MaxLength => Defaults.WordRowLength;
 
     public WordChallenge Challenge
     {
         get => _challenge;
-        set
+        private set
         {
             _challenge = value;
             OnPropertyChanged();
@@ -54,29 +53,11 @@ public class MainViewModel : BaseViewModel
     public bool CanGuess
     {
         get => _canGuess;
-        set 
+        private set 
         {
             _canGuess = value;
             OnPropertyChanged();
         }
-    }
-
-    void SetSecretWord()
-    {
-        Task.Run(async () =>
-        {
-            var secretWord = await _wordService.GetWordAsync();
-            Challenge = new WordChallenge(secretWord.ToUpper(), 6);
-        });
-    }
-
-    void SetCommands()
-    {
-        SubmitGuessCommand = new Command
-        (
-            async () => await SubmitGuess(),
-            () => !_isGuessing
-        );
     }
 
     protected void OnGuessTextChanged(string guessText)
@@ -88,7 +69,7 @@ public class MainViewModel : BaseViewModel
     {
         await _guessTextSemaphore.WaitAsync();
 
-        Task.Run(() => Challenge.UpdateCurrentGuessText(guessText?.ToUpper()));
+        await Task.Run(() => Challenge.UpdateCurrentGuessText(guessText?.ToUpper()));
 
         _guessTextSemaphore.Release();
     }
@@ -131,6 +112,24 @@ public class MainViewModel : BaseViewModel
     bool CompareGuessToWord()
     {
         return Challenge.MakeGuess();
+    }
+
+    void SetSecretWord()
+    {
+        Task.Run(async () =>
+        {
+            var secretWord = await _wordService.GetWordAsync();
+            Challenge = new WordChallenge(secretWord.ToUpper(), 6);
+        });
+    }
+
+    void SetCommands()
+    {
+        SubmitGuessCommand = new Command
+        (
+            async () => await SubmitGuess(),
+            () => !_isGuessing
+        );
     }
 
     async Task OnIncorrectGuess()
