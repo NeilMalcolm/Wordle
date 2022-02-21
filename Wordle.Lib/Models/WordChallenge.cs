@@ -62,11 +62,12 @@ public class WordChallenge : NotifyPropertyModel
         if (result)
         {
             State = ChallengeState.Success;
+            return true;
         }
 
         _currentGuessAttempt++;
 
-        if (_currentGuessAttempt > _maxGuessAttempts)
+        if (_currentGuessAttempt == _maxGuessAttempts)
         {
             State = ChallengeState.Failure;
             return false;

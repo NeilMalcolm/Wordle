@@ -13,6 +13,7 @@ public class WordChallenge_Constructor_Tests : BaseWordChallengeTests
     [TestCase(7)]
     public void WhenWordChallengeIsInitialized_ThenWordRowsLengthIsEqualToNumRowsParameter(int numRows)
     {
+        // Arrange
         var challenge = new WordChallenge("Crest", numRows);
 
         // Assert
@@ -26,6 +27,7 @@ public class WordChallenge_Constructor_Tests : BaseWordChallengeTests
     [TestCase(7)]
     public void WhenWordChallengeIsInitialized_ThenEachWordRowCharactersArrayLengthIsEqualToRowLengthParameter(int rowLength)
     {
+        // Arrange
         var challenge = new WordChallenge("Crest", 6, rowLength);
 
         // Assert
@@ -42,6 +44,7 @@ public class WordChallenge_Constructor_Tests : BaseWordChallengeTests
     [TestCase(7)]
     public void WhenWordChallengeIsInitialized_ThenEnteredCharactersArrayLengthIsEqualToRowLengthParameter(int rowLength)
     {
+        // Arrange
         var challenge = new WordChallenge("Crest", 6, rowLength);
 
         // Assert
