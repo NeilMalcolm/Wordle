@@ -67,6 +67,8 @@ public class WordRow : NotifyPropertyModel
     public bool IsComplete 
         => (_word?.Length ?? 0) == _maxLength;
 
+    public bool HasMadeGuess { get; private set; }
+
     public void Set(string text)
     {
         if (text is null || text.Length == 0)
@@ -78,7 +80,7 @@ public class WordRow : NotifyPropertyModel
         SetWordAndCharactersArray(text);
     }
 
-    public bool CompareTo(string word)
+    public bool MakeGuess(string word)
     {
         if (string.IsNullOrWhiteSpace(word))
         {
@@ -102,6 +104,8 @@ public class WordRow : NotifyPropertyModel
                 wordChar.CharacterStatus = Enums.CharacterCorrectStatus.NotInWord;
             }
         }
+
+        HasMadeGuess = true;
 
         return IsCorrect;
     }

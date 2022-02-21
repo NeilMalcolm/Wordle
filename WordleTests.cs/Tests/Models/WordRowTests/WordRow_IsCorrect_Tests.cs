@@ -10,7 +10,7 @@ public class WordRow_IsCorrect_Tests : BaseWordRowTests
     [TestCase(4, "")]
     [TestCase(4, null)]
     [TestCase(4, "Test")]
-    public void WhenCompareToHasNotBeenCalled_ThenIsCorrectIsFalse(int maxRowLength, string text)
+    public void WhenMakeGuessHasNotBeenCalled_ThenIsCorrectIsFalse(int maxRowLength, string text)
     {
         var wordRow = new WordRow(text, maxRowLength);
 
@@ -20,13 +20,13 @@ public class WordRow_IsCorrect_Tests : BaseWordRowTests
     [Test]
     [TestCase(5,"Tests", "Tests")]
     [TestCase(6, "Create", "Create")]
-    public void WhenCompareToIsCalledWithMatchingText_ThenIsCorrectIsTrue(int maxRowLength, string text, string expectedText)
+    public void WhenMakeGuessIsCalledWithMatchingText_ThenIsCorrectIsTrue(int maxRowLength, string text, string expectedText)
     {
         // Arrange
         var wordRow = new WordRow(text, maxRowLength);
 
         // Act
-        wordRow.CompareTo(expectedText);
+        wordRow.MakeGuess(expectedText);
 
         // Assert
         Assert.IsTrue(wordRow.IsCorrect);
@@ -35,26 +35,26 @@ public class WordRow_IsCorrect_Tests : BaseWordRowTests
     [Test]
     [TestCase(5,"Tests", "Tests")]
     [TestCase(6, "Create", "Create")]
-    public void WhenCompareToIsCalledWithMatchingText_ThenCompareToReturnsTrue(int maxRowLength, string text, string expectedText)
+    public void WhenMakeGuessIsCalledWithMatchingText_ThenMakeGuessReturnsTrue(int maxRowLength, string text, string expectedText)
     {
         // Arrange
         var wordRow = new WordRow(text, maxRowLength);
 
         // Act/Assert
-        Assert.IsTrue(wordRow.CompareTo(expectedText));
+        Assert.IsTrue(wordRow.MakeGuess(expectedText));
     }
 
 
     [Test]
     [TestCase(5, "Tests", "")]
     [TestCase(6, "Create", null)]
-    public void WhenCompareToIsCalledWithNullOrEmptyText_ThenCompareToReturnsFalse(int maxRowLength, string text, string expectedText)
+    public void WhenMakeGuessIsCalledWithNullOrEmptyText_ThenMakeGuessReturnsFalse(int maxRowLength, string text, string expectedText)
     {
         // Arrange
         var wordRow = new WordRow(text, maxRowLength);
 
         // Act
-        var result = wordRow.CompareTo(expectedText);
+        var result = wordRow.MakeGuess(expectedText);
 
         // Assert
         Assert.IsFalse(result);

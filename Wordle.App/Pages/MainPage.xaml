@@ -32,7 +32,7 @@
                    VerticalOptions="CenterAndExpand"/>
         </StackLayout>
         
-        <StackLayout BindableLayout.ItemsSource="{Binding WordRows}"
+        <StackLayout BindableLayout.ItemsSource="{Binding Challenge.WordRows}"
                      Spacing="7.5"
                      Grid.Row="1">
             <BindableLayout.ItemTemplate>
@@ -43,7 +43,7 @@
         </StackLayout>
         
         <StackLayout Grid.Row="3">
-            <views:KeyboardView MaxLength="{Binding MaxLength}"
+            <views:KeyboardView MaxLength="{Binding Challenge.MaxLength}"
                             Text="{Binding GuessText}"
                             OnEnterTappedCommand="{Binding SubmitGuessCommand}"
                             IsEnabled="{Binding CanGuess}"

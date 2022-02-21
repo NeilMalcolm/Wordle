@@ -1,29 +1,27 @@
 ﻿using System.Windows.Input;
 using Wordle.App.Services.WordService;
 using Wordle.Lib.Constants;
+using Wordle.Lib.Enums;
 using Wordle.Lib.Models;
 
 namespace Wordle.App.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
-    private readonly IWordService _wordService;
-    private readonly SemaphoreSlim _guessTextSemaphore = new(1, 1);
+    readonly IWordService _wordService;
+    readonly SemaphoreSlim _guessTextSemaphore = new(1, 1);
 
-    private string _secretWord;
-    private bool _isGuessing = false;
-    private int _currentGuessAttempt = 0;
-    private int _maxGuessCount = 6;
-    private bool _canGuess = true;
+    bool _isGuessing = false;
+    bool _canGuess = true;
 
-    private IList<WordRow> _wordRows;
-    private string _guessText;
+    WordChallenge _challenge;
+    IList<WordRow> _wordRows;
+    string _guessText;
 
     public MainViewModel(IWordService wordService)
     {
         _wordService = wordService;
 
-        SetWordRows();
         SetSecretWord();
         SetCommands();
     }
@@ -31,12 +29,13 @@ public class MainViewModel : BaseViewModel
     public ICommand SubmitGuessCommand { get; private set; }
     public int MaxLength => Defaults.WordRowLength;
 
-    public IList<WordRow> WordRows
+
+    public WordChallenge Challenge
     {
-        get => _wordRows;
-        private set
+        get => _challenge;
+        set
         {
-            _wordRows = value;
+            _challenge = value;
             OnPropertyChanged();
         }
     }
@@ -62,19 +61,13 @@ public class MainViewModel : BaseViewModel
         }
     }
 
-    void SetWordRows()
-    {
-        WordRows = new List<WordRow>();
-
-        for (int i = 0; i < _maxGuessCount; i++)
-        {
-            WordRows.Add(new WordRow(MaxLength));
-        }
-    }
-
     void SetSecretWord()
     {
-        Task.Run(async () => _secretWord = await _wordService.GetWordAsync());
+        Task.Run(async () =>
+        {
+            var secretWord = await _wordService.GetWordAsync();
+            Challenge = new WordChallenge(secretWord.ToUpper(), 6);
+        });
     }
 
     void SetCommands()
@@ -95,7 +88,7 @@ public class MainViewModel : BaseViewModel
     {
         await _guessTextSemaphore.WaitAsync();
 
-        WordRows[_currentGuessAttempt].Set(guessText?.ToUpper());
+        Task.Run(() => Challenge.UpdateCurrentGuessText(guessText?.ToUpper()));
 
         _guessTextSemaphore.Release();
     }
@@ -111,13 +104,13 @@ public class MainViewModel : BaseViewModel
             return;
         }
 
-        if (!WordRows[_currentGuessAttempt].IsComplete)
+        if (!Challenge.CanMakeGuessOnCurrentRow)
         {
             FinishSubmitGuess();
             return;
         }
 
-        if (CompareGuessToWord(_secretWord.ToUpper(), WordRows[_currentGuessAttempt]))
+        if (CompareGuessToWord())
         {
             await OnCorrectGuess();
         }
@@ -135,17 +128,16 @@ public class MainViewModel : BaseViewModel
         _guessTextSemaphore.Release();
     }
 
-    bool CompareGuessToWord(string word, WordRow wordRow)
+    bool CompareGuessToWord()
     {
-        return wordRow.CompareTo(word);
+        return Challenge.MakeGuess();
     }
 
     async Task OnIncorrectGuess()
     {
-        _currentGuessAttempt++;
         GuessText = String.Empty;
 
-        if (_currentGuessAttempt > _maxGuessCount)
+        if (Challenge.State == ChallengeState.Failure)
         {
             // show failure!
             CanGuess = false;
