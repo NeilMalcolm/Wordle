@@ -1,0 +1,10 @@
+<Label xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="Wordle.App.Views.WordRowLetterView"
+       TextColor="Black"
+       FontSize="22"
+       FontAttributes="Bold"
+       HeightRequest="55"
+       WidthRequest="55"
+       VerticalTextAlignment="Center"
+       HorizontalTextAlignment="Center"/>

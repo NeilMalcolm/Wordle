@@ -1,0 +1,28 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wordle.App.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}"
+             xmlns:views="clr-namespace:Wordle.App.Views">
+
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding WordRows}"
+                        Margin="7.5">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                                   ItemSpacing="7.5"/>
+            </CollectionView.ItemsLayout>
+
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <views:WordRowView BindingContext="{Binding .}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <views:KeyboardView MaxLength="{Binding MaxLength}"
+                            Text="{Binding GuessText}"
+                            OnEnterTappedCommand="{Binding SubmitGuessCommand}"
+                            IsEnabled="{Binding CanGuess}"/>
+    </StackLayout>
+</ContentPage>

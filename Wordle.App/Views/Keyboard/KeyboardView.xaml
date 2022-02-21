@@ -1,0 +1,264 @@
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:views="clr-namespace:Wordle.App.Views"
+      x:Class="Wordle.App.Views.KeyboardView"
+      x:Name="KeyboardViewRoot"
+      ColumnDefinitions="*,*,*,*,*,*,*,*,*,*"
+      RowDefinitions="*,*,*"
+      RowSpacing="4"
+      Margin="3, 0">
+
+    <Grid.Resources>
+        <Style TargetType="Button"
+               x:Key="KeyboardButtonStyle">
+            <Setter Property="BackgroundColor"
+                    Value="LightGray"/>
+            <Setter Property="TextColor"
+                    Value="DimGray"/>
+            <Setter Property="FontAttributes"
+                    Value="Bold"/>
+            <Setter Property="FontSize"
+                    Value="10"/>
+            <Setter Property="WidthRequest"
+                    Value="36"/>
+            <Setter Property="HeightRequest"
+                    Value="45"/>
+            <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+        </Style>
+        <Style TargetType="Button"
+               x:Key="KeyboardEnterButtonStyle"
+               BasedOn="{StaticResource KeyboardButtonStyle}">
+            <Setter Property="WidthRequest"
+                    Value="70"/>
+        </Style>
+    </Grid.Resources>
+    
+    <!-- First Row -->
+    <Button Text="Q"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="0"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="W"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="1"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="E"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="2"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="R"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="3"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="T"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="4"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="Y"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="5"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="U"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="6"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="I"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="7"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="O"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="8"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="P"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="9"
+            Grid.Row="0"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <!-- Second Row -->
+    <Button Text="A"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="0"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="S"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="1"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="D"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="2"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="F"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="3"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="G"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="4"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="H"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="5"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="J"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="6"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="K"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="7"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="L"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="8"
+            Grid.Row="1"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <!-- Third Row -->
+    <Button Text="ENTER"
+            Style="{StaticResource KeyboardEnterButtonStyle}"
+            FontSize="Micro"
+            Grid.Column="0"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnEnterTappedCommand}"/>
+
+    <Button Text="Z"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="2"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="X"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="3"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="C"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="4"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="V"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="5"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="B"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="6"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="N"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="7"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="M"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="8"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=OnButtonTappedCommand}"
+            CommandParameter="{Binding Source={RelativeSource Self}, Path=Text}"/>
+
+    <Button Text="&#x232B;"
+            Style="{StaticResource KeyboardButtonStyle}"
+            Grid.Column="9"
+            Grid.Row="2"
+            Command="{Binding Source={x:Reference KeyboardViewRoot}, 
+                              Path=BackspaceCommand}"/>
+
+</Grid>
