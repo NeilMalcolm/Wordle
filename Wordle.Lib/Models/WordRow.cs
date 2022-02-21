@@ -67,6 +67,8 @@ public class WordRow : NotifyPropertyModel
     public bool IsComplete 
         => (_word?.Length ?? 0) == _maxLength;
 
+    public bool HasMadeGuess { get; private set; }
+
     public void Set(string text)
     {
         if (text is null || text.Length == 0)
@@ -78,7 +80,7 @@ public class WordRow : NotifyPropertyModel
         SetWordAndCharactersArray(text);
     }
 
-    public bool CompareTo(string word)
+    public bool MakeGuess(string word)
     {
         if (string.IsNullOrWhiteSpace(word))
         {
@@ -103,6 +105,8 @@ public class WordRow : NotifyPropertyModel
             }
         }
 
+        HasMadeGuess = true;
+
         return IsCorrect;
     }
 
@@ -117,19 +121,17 @@ public class WordRow : NotifyPropertyModel
 
         Word = text;
         
-        Characters = new WordCharacter[_maxLength];
+        var newCharacters = new WordCharacter[_maxLength];
+        var textLength = string.IsNullOrEmpty(text) ? 0 : text.Length;
 
-        if (!string.IsNullOrWhiteSpace(text))
+        for (int i = 0; i < Characters.Length; i++)
         {
-            Array.Copy(text.Select(c => new WordCharacter(c)).ToArray(), _characters, text.Length);
+            newCharacters[i] = i < textLength
+                ? new WordCharacter(text[i]) 
+                : new WordCharacter();
         }
-        else
-        {
-            for (int i = 0; i < Characters.Length; i++)
-            {
-                Characters[i] = new WordCharacter();
-            }
-        }
+
+        Characters = newCharacters;
     }
 
     void ClearAll()

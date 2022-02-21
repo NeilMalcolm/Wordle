@@ -3,12 +3,20 @@
              xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
              xmlns:local="clr-namespace:Wordle.App"
              x:Class="Wordle.App.App"
+             xmlns:views="clr-namespace:Wordle.App.Views"
              windows:Application.ImageDirectory="Assets">
     <Application.Resources>
         <ResourceDictionary>
 
             <Color x:Key="PrimaryColor">#512bdf</Color>
             <Color x:Key="SecondaryColor">White</Color>
+            
+            <Color x:Key="IncorrectPositionBackgroundColor">#f5d142</Color>
+            <Color x:Key="CorrectPositionBackgroundColor">#4dbd51</Color>
+            <Color x:Key="NotInWordBackgroundColor">#6b6b6b</Color>
+            <Color x:Key="UnknownBackgroundColor">LightGray</Color>
+            <Color x:Key="UnsubmittedTextColor">DimGray</Color>
+            <Color x:Key="SubmittedTextColor">White</Color>
 
             <Style TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
@@ -20,6 +28,38 @@
                 <Setter Property="FontFamily" Value="OpenSansRegular" />
                 <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
                 <Setter Property="Padding" Value="14,10" />
+            </Style>
+
+            <Style x:Key="UnknownWordRowLetterStyle" 
+                   TargetType="views:WordRowLetterView">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource UnknownBackgroundColor}"/>
+                <Setter Property="TextColor"
+                        Value="{StaticResource UnsubmittedTextColor}"/>
+            </Style>
+
+            <Style x:Key="IncorrectWordRowLetterStyle" 
+                   TargetType="views:WordRowLetterView">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource IncorrectPositionBackgroundColor}"/>
+                <Setter Property="TextColor"
+                        Value="{StaticResource SubmittedTextColor}"/>
+            </Style>
+
+            <Style x:Key="CorrectWordRowLetterStyle" 
+                   TargetType="views:WordRowLetterView">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource CorrectPositionBackgroundColor}"/>
+                <Setter Property="TextColor"
+                        Value="{StaticResource SubmittedTextColor}"/>
+            </Style>
+
+            <Style x:Key="NotInWordWordRowLetterStyle" 
+                   TargetType="views:WordRowLetterView">
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource NotInWordBackgroundColor}"/>
+                <Setter Property="TextColor"
+                        Value="{StaticResource SubmittedTextColor}"/>
             </Style>
 
         </ResourceDictionary>

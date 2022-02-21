@@ -5,21 +5,6 @@
              xmlns:views="clr-namespace:Wordle.App.Views">
 
     <Grid RowDefinitions="65, *, Auto, Auto">
-        <!--<CollectionView ItemsSource="{Binding WordRows}"
-                        Margin="7.5"
-                        VerticalOptions="FillAndExpand">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="7.5"/>
-            </CollectionView.ItemsLayout>
-
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <views:WordRowView BindingContext="{Binding .}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>-->
         <StackLayout Grid.Row="0"
                      Padding="0"
                      Margin="0">
@@ -32,7 +17,7 @@
                    VerticalOptions="CenterAndExpand"/>
         </StackLayout>
         
-        <StackLayout BindableLayout.ItemsSource="{Binding WordRows}"
+        <StackLayout BindableLayout.ItemsSource="{Binding Challenge.WordRows}"
                      Spacing="7.5"
                      Grid.Row="1">
             <BindableLayout.ItemTemplate>
@@ -43,9 +28,10 @@
         </StackLayout>
         
         <StackLayout Grid.Row="3">
-            <views:KeyboardView MaxLength="{Binding MaxLength}"
+            <views:KeyboardView MaxLength="{Binding Challenge.MaxLength}"
                             Text="{Binding GuessText}"
                             OnEnterTappedCommand="{Binding SubmitGuessCommand}"
+                            EnteredCharacters="{Binding Challenge.EnteredCharacters}"
                             IsEnabled="{Binding CanGuess}"
                             Padding="0, 10"/>
         </StackLayout>
