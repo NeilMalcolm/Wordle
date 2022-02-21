@@ -8,13 +8,15 @@ namespace Wordle.App.ViewModels;
 
 public class MainViewModel : BaseViewModel
 {
+    const int NumGuesses = 6;
+
     readonly IWordService _wordService;
     readonly SemaphoreSlim _guessTextSemaphore = new(1, 1);
 
     bool _isGuessing = false;
     bool _canGuess = true;
 
-    WordChallenge _challenge;
+    WordChallenge _challenge = new WordChallenge("", NumGuesses);
     string _guessText;
 
     public MainViewModel(IWordService wordService)
@@ -119,7 +121,7 @@ public class MainViewModel : BaseViewModel
         Task.Run(async () =>
         {
             var secretWord = await _wordService.GetWordAsync();
-            Challenge = new WordChallenge(secretWord.ToUpper(), 6);
+            Challenge = new WordChallenge(secretWord.ToUpper(), NumGuesses);
         });
     }
 

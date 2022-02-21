@@ -121,19 +121,17 @@ public class WordRow : NotifyPropertyModel
 
         Word = text;
         
-        Characters = new WordCharacter[_maxLength];
+        var newCharacters = new WordCharacter[_maxLength];
+        var textLength = string.IsNullOrEmpty(text) ? 0 : text.Length;
 
-        if (!string.IsNullOrWhiteSpace(text))
+        for (int i = 0; i < Characters.Length; i++)
         {
-            Array.Copy(text.Select(c => new WordCharacter(c)).ToArray(), _characters, text.Length);
+            newCharacters[i] = i < textLength
+                ? new WordCharacter(text[i]) 
+                : new WordCharacter();
         }
-        else
-        {
-            for (int i = 0; i < Characters.Length; i++)
-            {
-                Characters[i] = new WordCharacter();
-            }
-        }
+
+        Characters = newCharacters;
     }
 
     void ClearAll()
